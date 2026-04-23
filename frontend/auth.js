@@ -1,29 +1,17 @@
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_URL";
-const SUPABASE_KEY = "PASTE_YOUR_ANON_KEY";
+const SUPABASE_URL = "https://jvvpflzoifgbfuamegkf.supabase.co";
+const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
-// ✅ correct client creation
-const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// REGISTER
 async function register() {
-  console.log("REGISTER CLICKED");
-
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-
-  if (!email || !password) {
-    alert("Enter email and password");
-    return;
-  }
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password
   });
-
-  console.log("RESULT:", data, error);
 
   if (error) {
     alert(error.message);
@@ -32,9 +20,8 @@ async function register() {
   }
 }
 
+// LOGIN
 async function login() {
-  console.log("LOGIN CLICKED");
-
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -43,12 +30,9 @@ async function login() {
     password
   });
 
-  console.log("RESULT:", data, error);
-
   if (error) {
     alert(error.message);
   } else {
-    alert("Login successful");
     window.location.href = "dashboard.html";
   }
 }
